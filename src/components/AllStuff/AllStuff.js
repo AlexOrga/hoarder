@@ -1,5 +1,6 @@
 import React from 'react';
 
+import allStuffRequest from '../../firebaseRequests/allstuff';
 import './AllStuff.scss';
 
 class AllStuff extends React.Component {
