@@ -21,4 +21,17 @@ const getRequest = () => {
   });
 };
 
-export default {getRequest};
+const saveItem = (savedItem) => {
+  return new Promise((resolve, reject) => {
+    axios
+      .post(`${constants.firebaseConfig.databaseURL}/savedStuff.json`, savedItem)
+      .then(res => {
+        resolve(res);
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
+};
+
+export default {getRequest, saveItem};
