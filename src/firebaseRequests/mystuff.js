@@ -1,21 +1,21 @@
 import axios from 'axios';
 import constants from '../constants';
 
-const getRequest = () => {
+const getRequest = (uid) => {
   return new Promise((resolve, reject) => {
     axios
-      .get(`${constants.firebaseConfig.databaseURL}/allStuff.json`)
-      .then(res => {
-        const allStuff = [];
+      .get(`${constants.firebaseConfig.databaseURL}/savedStuff.json?orderBy=uid&equalTo=${uid}`)
+      .then(((res) => {
+        const myStuff = [];
         if (res.data !== null) {
           Object.keys(res.data).forEach(fbKey => {
             res.data[fbKey].id = fbKey;
-            allStuff.push(res.data[fbKey]);
+            myStuff.push(res.data[fbKey]);
           });
         }
-        resolve(allStuff);
-      })
-      .catch(err => {
+        resolve(myStuff);
+      }))
+      .catch((err) => {
         reject(err);
       });
   });
